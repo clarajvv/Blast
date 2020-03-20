@@ -15,12 +15,12 @@ public class GUIBlast {
 	private static final String dataBaseFile = new String("yeast.aa");
 	private static final String dataBaseIndexes = new String("yeast.aa.indexs");
 
-	private static Runnable busqueda = new Runnable() {
+	private static Runnable buscar = new Runnable() {
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			JFrame frame = new JFrame("búsqueda BLAST");
+			JFrame frame = new JFrame("bÃºsqueda BLAST");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			Config1 t = new Config1();
@@ -32,13 +32,24 @@ public class GUIBlast {
 
 			Resultados resultado = new Resultados();
 
+			ListenerBusc l = new ListenerBusc(t, p, busqueda, resultado);
+
+			frame.add(configs, BorderLayout.WEST);
+			frame.add(busqueda, BorderLayout.CENTER);
+			frame.add(resultado, BorderLayout.SOUTH);
+
+			busqueda.getBusc().addActionListener(l);
+
+			frame.pack();
+			frame.setVisible(true);
+			
 			/*
 			 * JPanel config1 = new JPanel(); JPanel config2 = new JPanel(); JPanel busqueda
 			 * = new JPanel(); JPanel resultado = new JPanel();
 			 * 
 			 * // elementos JLabel tipo = new JLabel("Tipo de datos"); JLabel porcentaje =
-			 * new JLabel("Porcentaje"); JRadioButton prot = new JRadioButton("proteína",
-			 * true); JRadioButton nuc = new JRadioButton("nucleótido"); ButtonGroup agrupar
+			 * new JLabel("Porcentaje"); JRadioButton prot = new JRadioButton("proteÃ­na",
+			 * true); JRadioButton nuc = new JRadioButton("nucleÃ³tido"); ButtonGroup agrupar
 			 * = new ButtonGroup(); agrupar.add(prot); agrupar.add(nuc); JTextField
 			 * numPorcenjate = new JTextField(5);
 			 * 
@@ -91,22 +102,12 @@ public class GUIBlast {
 			 * 
 			 * resultado.add(tResultados); resultado.add(devuelve);
 			 */
-			ListenerBusc l = new ListenerBusc(t, p, busqueda, resultado);
-
-			frame.add(configs, BorderLayout.WEST);
-			frame.add(busqueda, BorderLayout.CENTER);
-			frame.add(resultado, BorderLayout.SOUTH);
-
-			busqueda.getBusc().addActionListener(l);
-
-			frame.pack();
-			frame.setVisible(true);
 
 		}
 	};
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(busqueda);
+		SwingUtilities.invokeLater(buscar);
 
 	}
 
